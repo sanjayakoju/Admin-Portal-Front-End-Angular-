@@ -1,0 +1,8 @@
+<mat-toolbar class="mat-primary">
+    <h3 [style.color]="'white'">ADMIN PORTAL</h3>
+    <span class="toolbar-spacer"></span>
+    <span [hidden]="!loggedIn"><a mat-button routerLink="viewBookList">View Book List</a></span>
+    <span [hidden]="!loggedIn"><a mat-button routerLink="addNewBook">Add New Book</a></span>
+    <span [hidden]="!loggedIn"><a mat-button>Logout</a></span>
+</mat-toolbar>
+<button mat-raised-button color="warn" (click)="toggleDisplay()">Toggle</button>
