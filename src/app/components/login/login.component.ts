@@ -18,7 +18,17 @@ export class LoginComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.loginService.checkSession().subscribe(
+  		res => {
+        this.loggedIn=true;
+        console.log(localStorage.getItem('XAuthToken'));
+  		},
+  		error => {
+  			this.loggedIn=false;
+  		}
+  	);
   }
+  
 
   // onSubmit()
   // {
@@ -33,9 +43,13 @@ export class LoginComponent implements OnInit {
     this.loginService.sendCredential(this.credential.username, this.credential.password).subscribe(
       res => {
         console.log(res);
-        localStorage.setItem("XAuthToken", JSON.parse(JSON.stringify(res)).data);
+        
+        localStorage.setItem("XAuthToken",res.token);
+        //sessionStorage.setItem("XAuthToken",JSON.stringify(res));
+        console.log(JSON.parse(JSON.stringify(res)));
+        //localStorage.setItem("xAuthToken", res.token);
         this.loggedIn = true;
-        location.reload();
+        //location.reload();
         console.log("Loggin Success");
       },
       error => {

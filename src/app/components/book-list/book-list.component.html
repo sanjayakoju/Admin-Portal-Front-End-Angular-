@@ -4,8 +4,7 @@
             <thead>
                 <tr>
                     <th>
-                        <!-- <input type="checkbox" (change)="updateSelected($event.target.checked" /> -->
-                        <input type="checkbox" />
+                        <input type="checkbox" (change)="updateSelected($event.target.checked)" />
                     </th>
                     <th>Title</th>
                     <th>Author</th>
@@ -39,6 +38,6 @@
         </table>
     </div>
     <br>
-    <button mat-raised-button class="mat-warn " id="deleteSelected " (click)="removeSelectedBooks() ">
+    <button mat-raised-button class="mat-warn " id="deleteSelected " (click)="removeSelectedBooks()">
         Delete Select</button>
 </div>

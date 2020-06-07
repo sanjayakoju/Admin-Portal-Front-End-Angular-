@@ -33,9 +33,11 @@ export class BookListComponent implements OnInit {
     openDialog(book:Book) {
       let dialogRef = this.dialog.open(DialogResultExampleDialog);
       dialogRef.afterClosed().subscribe(
-        result => {
+        result => 
+        {
           console.log(result);
-          if(result=="yes") {
+          if(result=="yes") 
+          {
             this.bookService.deleteBookById(book.id).subscribe(
               res => {
                 console.log(res);
@@ -66,6 +68,60 @@ export class BookListComponent implements OnInit {
       }
     )
   }
+
+  updateRemoveBookList(checked:boolean,book:Book)
+  {
+    if(checked)
+    {
+      this.removeBookList.push(book);
+    }
+    else
+    {
+      this.removeBookList.slice(this.removeBookList.indexOf(book),1);
+    }
+  }
+
+  updateSelected(checked:boolean)
+  {
+    if(checked)
+    {
+      this.allChecked=true;
+      this.removeBookList=this.bookList.slice();
+    }
+    else
+    {
+      this.allChecked=false;
+      this.removeBookList=[];
+    }
+  }
+
+  removeSelectedBooks()
+  {
+    let dialogRef = this.dialog.open(DialogResultExampleDialog);
+      dialogRef.afterClosed().subscribe(
+        result => 
+        {
+          console.log(result);
+          if(result=="yes") 
+          {
+            for(let book of this.removeBookList)
+            {
+              this.bookService.deleteBookById(book.id).subscribe(
+                res => {
+                  console.log(res);
+                }, 
+                err => {
+                  console.log(err);
+                }
+                );
+            }
+            location.reload();
+            // this.getBookList();
+          }
+        }
+        );
+  }
+
   ngOnInit() {
     this.getBookList();
   }

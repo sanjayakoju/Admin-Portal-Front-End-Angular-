@@ -10,6 +10,8 @@ import { Router } from '@angular/router';
 export class NavBarComponent implements OnInit {
 
 private loggedIn=false;
+private username:string;
+private password:string;
 
   constructor(
     private loginService:LoginService, private router:Router
@@ -36,9 +38,12 @@ private loggedIn=false;
   ngOnInit() {
     this.loginService.checkSession().subscribe(
       res => {
+        console.log('CheckSession work'+res);
         this.loggedIn=true;
       },
       error => {
+        console.log('CheckSession not work');
+        console.log(error);
         this.loggedIn=false;
       }
     );
