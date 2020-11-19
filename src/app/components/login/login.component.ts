@@ -20,6 +20,9 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
     this.loginService.checkSession().subscribe(
   		res => {
+          // let token = response.headers.get("Authorization");  
+  
+          // localStorage.setItem("token" , token);  
         this.loggedIn=true;
         console.log(localStorage.getItem('XAuthToken'));
   		},
